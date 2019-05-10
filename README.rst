@@ -1,6 +1,12 @@
 Mojibake
 --------
 
+Installation::
+
+	$ git clone https://github.com/BeetleChunks/Mojibake.git
+	$ cd Mojibake
+	$ python setup.py install
+
 To use, simply do::
 
 	>>> from mojibake import Mojibake
