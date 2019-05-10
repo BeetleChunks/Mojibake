@@ -7,63 +7,64 @@ from unicodedata import normalize
 log = logging.getLogger(__name__)
 
 class Mojibake:
-	def __init__(self, encoding='utf-8', normalizer='NFC'):
-		self.default_encoding = encoding
+	def __init__(self, encoding='utf-8', normalizer='NFC', errors='ignore'):
+		self.default_encoding   = encoding
 		self.default_normalizer = normalizer
+		self.default_error_handling = errors
 
 	# Unicode to string, string WILL be returned regardless of type by default
 	# If string then it will be decoded then re-encoded
 	def encode(self, unicode_data, preserve_type=False):
 		try:
 			if type(unicode_data) == unicode:
-				string_data = unicode_data.encode(self.default_encoding)
+				string_data = unicode_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			elif type(unicode_data) == str:
 				string_data = self.decode(unicode_data)
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			elif type(unicode_data) == int:
 				string_data = str(unicode_data)
 				string_data = self.decode(string_data)
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			elif type(unicode_data) == long:
 				string_data = str(unicode_data)
 				string_data = self.decode(string_data)
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			elif type(unicode_data) == float:
 				string_data = str(unicode_data)
 				string_data = self.decode(string_data)
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			elif type(unicode_data) == complex:
 				string_data = str(unicode_data)
 				string_data = self.decode(string_data)
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			elif unicode_data == None:
 				string_data = u'None'
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
 			# Needs testing and validation
 			elif type(unicode_data) == bytearray:
 				string_data = self.decode(unicode_data)
-				string_data = string_data.encode(self.default_encoding)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
 				return string_data
 
@@ -79,37 +80,37 @@ class Mojibake:
 	def decode(self, string_data, preserve_type=False):
 		try:
 			if type(string_data) == str:
-				unicode_data = normalize(self.default_normalizer, string_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, string_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
 			elif type(string_data) == unicode:
 				unicode_data = self.encode(string_data)
-				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
 			elif type(string_data) == int:
 				unicode_data = str(string_data)
-				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
 			elif type(string_data) == long:
 				unicode_data = str(string_data)
-				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
 			elif type(string_data) == float:
 				unicode_data = str(string_data)
-				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
 			elif type(string_data) == complex:
 				unicode_data = str(string_data)
-				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
@@ -120,7 +121,7 @@ class Mojibake:
 
 			# Needs testing and validation
 			elif type(string_data) == bytearray:
-				unicode_data = normalize(self.default_normalizer, string_data.decode(self.default_encoding))
+				unicode_data = normalize(self.default_normalizer, string_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
 
