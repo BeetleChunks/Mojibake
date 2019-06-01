@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
 	name='mojibake',
-	version='0.0.1',
+	version='0.0.2',
 	description='Library of data encoding/decoding utility functions',
 	license='GPLv3+',
 	packages=['mojibake'],
