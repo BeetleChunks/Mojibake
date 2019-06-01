@@ -24,8 +24,8 @@ Here is a list of available methods::
 	dict_decode()
 	list_encode()
 	list_decode()
-	tuple_encode
-	tuple_decode
+	tuple_encode()
+	tuple_decode()
 	dict_to_string()
 	string_to_dict()
 	decode_url()
