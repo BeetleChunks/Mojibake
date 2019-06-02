@@ -3,6 +3,7 @@ import json
 import urllib
 
 from unicodedata import normalize
+from datetime import datetime
 
 log = logging.getLogger(__name__)
 
@@ -43,6 +44,13 @@ class Mojibake:
 
 			elif isinstance(unicode_data, float):
 				string_data = str(unicode_data)
+				string_data = self.decode(string_data)
+				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
+
+				return string_data
+
+			elif isinstance(unicode_data, datetime):
+				string_data = unicode_data.isoformat()
 				string_data = self.decode(string_data)
 				string_data = string_data.encode(self.default_encoding, self.default_error_handling)
 
@@ -111,6 +119,12 @@ class Mojibake:
 
 			elif isinstance(string_data, float):
 				unicode_data = str(string_data)
+				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
+
+				return unicode_data
+
+			elif isinstance(string_data, datetime):
+				unicode_data = string_data.isoformat()
 				unicode_data = normalize(self.default_normalizer, unicode_data.decode(self.default_encoding, self.default_error_handling))
 
 				return unicode_data
