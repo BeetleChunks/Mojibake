@@ -4,6 +4,7 @@ import urllib
 
 from unicodedata import normalize
 from datetime import datetime
+from base64 import b64decode, b64encode
 
 log = logging.getLogger(__name__)
 
@@ -377,6 +378,31 @@ class Mojibake:
 
 			else:
 				raise ValueError('encode_url takes a value of type "str" or "unicode"')
+
+		except Exception as e:
+			log.exception("%s", e, exc_info=True)
+			raise
+
+	# Returns base64 encoded string
+	def b64_encode(self, b64_data):
+		try:
+			b64_data = self.encode(b64_data)
+
+			return b64encode(b64_data)
+
+		except Exception as e:
+			log.exception("%s", e, exc_info=True)
+			raise
+
+	# Returns base64 decoded string
+	def b64_decode(self, b64_data):
+		try:
+			b64_data = self.encode(b64_data)
+
+			# Ensure correct padding
+			b64_data += "=" * ((4 - len(b64_data) % 4) % 4)
+
+			return b64decode(b64_data)
 
 		except Exception as e:
 			log.exception("%s", e, exc_info=True)
