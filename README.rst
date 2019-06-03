@@ -1,13 +1,13 @@
 Mojibake
 --------
 
-Installation::
+# Installation
 
 	$ git clone https://github.com/BeetleChunks/Mojibake.git
 	$ cd Mojibake
 	$ python setup.py install
 
-To use, simply do::
+# Usage
 
 	>>> from mojibake import Mojibake
 	>>>
@@ -16,7 +16,7 @@ To use, simply do::
 	>>> my_string  = moji.encode(u'Some unicode data')
 	>>> my_unicode = moji.decode('Some string data')
 
-Here is a list of available methods::
+# Available Methods
 
 	encode()
 	decode()
@@ -30,3 +30,5 @@ Here is a list of available methods::
 	string_to_dict()
 	decode_url()
 	encode_url()
+	b64_encode()
+	b64_decode()
