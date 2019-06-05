@@ -344,7 +344,7 @@ class Mojibake:
 
 	# deserializes string to dict object using json.loads AFTER encoding the string
 	def string_to_dict(self, serialized_dict):
-		assert isinstance(dict_obj, str) or isinstance(dict_obj, unicode)
+		assert isinstance(serialized_dict, str) or isinstance(serialized_dict, unicode)
 
 		serialized_dict = self.encode(serialized_dict)
 		dict_obj = json.loads(serialized_dict)
@@ -354,7 +354,7 @@ class Mojibake:
 	# returns url decoded STRING
 	def decode_url(self, string_data):
 		try:
-			if isinstance(dict_obj, str) or isinstance(dict_obj, unicode):
+			if isinstance(string_data, str) or isinstance(string_data, unicode):
 				string_data    = self.encode(string_data)
 				encoded_string = urllib.unquote_plus(string_data)
 
@@ -370,7 +370,7 @@ class Mojibake:
 	# returns url encoded STRING
 	def encode_url(self, string_data):
 		try:
-			if isinstance(dict_obj, str) or isinstance(dict_obj, unicode):
+			if isinstance(string_data, str) or isinstance(string_data, unicode):
 				string_data    = self.encode(string_data)
 				encoded_string = urllib.quote_plus(string_data)
 
