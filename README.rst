@@ -32,3 +32,4 @@ Available Methods::
 	encode_url()
 	b64_encode()
 	b64_decode()
+	recursive_replace()

@@ -407,3 +407,15 @@ class Mojibake:
 		except Exception as e:
 			log.exception("%s", e, exc_info=True)
 			raise
+
+	def recursive_replace(self, unicode_data, uTo_replace, uReplace_with):
+		string_data   = self.encode(unicode_data)
+		sTo_replace   = self.encode(uTo_replace)
+		sReplace_with = self.encode(uReplace_with)
+
+		final_unicode_data = self.decode(string_data.replace(sTo_replace, sReplace_with))
+
+		if uTo_replace in final_unicode_data:
+			final_unicode_data = self.recursive_replace(final_unicode_data, uTo_replace, uReplace_with)
+
+		return final_unicode_data
